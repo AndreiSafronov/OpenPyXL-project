@@ -2,14 +2,19 @@ import openpyxl
 from examples.data_faker import data_samples
 
 
-def example(filename="report.xlsx"):
+def example():
     book = openpyxl.Workbook()
-    sheet = book.active
+    book.remove(book.active)
+    book.create_sheet("Персонал")
+    book.create_sheet("Студенты")
+    book.create_sheet("Преподаватели", 0)
 
-    sheet.append(["ФИО", "Адрес", "Дата рождения", "Город", "ID/Рейтинг"])
+    for worksheet in book.worksheets:
+        worksheet.append(["ФИО", "Адрес", "Дата рождения", "Город", "Рейтинг"])
 
-    for row in data_samples():
-        sheet.append(row)
+    for sheet in book.worksheets:
+        for row in data_samples():
+            sheet.append(row)
 
-    book.save(filename)
-    print(f"Файл {filename} успешно создан!")
+    book.save("book.xlsx")
+    print(f"Файл успешно создан!")
