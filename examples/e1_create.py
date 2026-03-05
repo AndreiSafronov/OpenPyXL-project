@@ -10,11 +10,10 @@ def example():
     book.create_sheet("Преподаватели", 0)
 
     for worksheet in book.worksheets:
-        worksheet.append(["ФИО", "Адрес", "Дата рождения", "Город", "Рейтинг"])
+        worksheet.append(["ФИО", "Адрес", "Город", "Статус"])
 
     for sheet in book.worksheets:
         for row in data_samples():
             sheet.append(row)
 
-    book.save("book.xlsx")
-    print(f"Файл успешно создан!")
+    book.save("test.xlsx")
